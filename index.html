@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luiz Fernando Tavares — Web Designer</title>
+<meta name="description" content="Luiz Fernando Tavares — Web Designer & UI/UX. Sites estratégicos, rápidos e memoráveis para marcas que querem se destacar.">
+<meta name="theme-color" content="#03050b">
+<meta property="og:title" content="Luiz Fernando Tavares — Web Designer">
+<meta property="og:description" content="Sites estratégicos, rápidos e memoráveis para marcas que querem se destacar.">
+<meta property="og:image" content="assets/luiz.webp">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2303050b'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial Black,Arial' font-weight='900' font-size='30' fill='%235b8cff'%3ELF%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Mrs+Saint+Delafield&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/luiz.webp">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ PRELOADER ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__grid"></div>
+  <div class="loader__top">
+    <span class="mono">LF® / PORTFÓLIO 2026</span>
+    <span class="mono">CARREGANDO EXPERIÊNCIA</span>
+  </div>
+  <div class="loader__center">
+    <div class="loader__mark"><span>L</span><span>F</span></div>
+    <div class="loader__name mono">LUIZ FERNANDO TAVARES</div>
+  </div>
+  <div class="loader__bottom">
+    <div class="loader__bar"><i id="loaderBar"></i></div>
+    <div class="loader__count"><span id="loaderCount">000</span><small>%</small></div>
+  </div>
+</div>
+
+<!-- ============ CURSOR ============ -->
+<div class="cursor" aria-hidden="true"><div class="cursor__dot"></div><div class="cursor__ring"><span class="cursor__label"></span></div></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i></i></div>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav__logo" data-magnetic aria-label="Início">
+    <span class="nav__mark">LF</span><span class="nav__reg">®</span>
+  </a>
+  <nav class="nav__links" aria-label="Principal">
+    <a href="#projetos" data-scramble>Projetos</a>
+    <a href="#servicos" data-scramble>Serviços</a>
+    <a href="#processo" data-scramble>Processo</a>
+    <a href="#contato" data-scramble>Contato</a>
+  </nav>
+  <a href="#contato" class="nav__status" data-magnetic><span class="pulse"></span><span>Disponível para projetos</span></a>
+  <button class="nav__burger" id="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <nav>
+    <a href="#projetos"><small>01</small>Projetos</a>
+    <a href="#servicos"><small>02</small>Serviços</a>
+    <a href="#processo"><small>03</small>Processo</a>
+    <a href="#contato"><small>04</small>Contato</a>
+  </nav>
+  <div class="menu__foot mono"><span>Web Designer · UI/UX</span><span>Brasil</span></div>
+</div>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+  <div class="hero__glow" aria-hidden="true"></div>
+
+  <div class="hero__meta hero__meta--tl mono reveal-up">
+    <span class="accent">Web Designer</span><br>Criador Digital
+  </div>
+  <div class="hero__meta hero__meta--tr mono reveal-up">
+    <span class="coord" id="coord">X 0000 · Y 0000</span>
+  </div>
+
+  <h1 class="hero__giant" aria-label="Portfolio">
+    <span class="giant-row"><span>P</span><span>O</span><span>R</span><span>T</span><span>F</span><span>O</span><span>L</span><span>I</span><span>O</span></span>
+  </h1>
+
+  <div class="hero__photo" id="heroPhoto">
+    <div class="hero__ring" aria-hidden="true"><svg viewBox="0 0 600 600"><circle cx="300" cy="300" r="290"/><circle cx="300" cy="300" r="230"/></svg></div>
+    <div class="hero__img-wrap">
+      <img src="assets/luiz.webp" alt="Luiz Fernando Tavares" class="hero__img" width="1086" height="1448">
+      <div class="hero__rim" aria-hidden="true"></div>
+    </div>
+    <span class="cross cross--a" aria-hidden="true"></span>
+    <span class="cross cross--b" aria-hidden="true"></span>
+  </div>
+
+  <div class="hero__intro">
+    <p class="hello">Olá, eu sou</p>
+    <h2 class="hero__name"><span class="line"><span>LUIZ FERNANDO</span></span><span class="line"><span>TAVARES</span></span></h2>
+    <p class="hero__role"><span class="line"><span>Web Designer &amp;</span></span><span class="line"><span>UI/UX Creator</span></span></p>
+    <p class="hero__bio reveal-up">Desenho e desenvolvo sites que unem estética, estratégia e performance. Cada detalhe — da tipografia à micro-interação — pensado para transformar visitantes em clientes.</p>
+    <p class="hero__loc mono reveal-up"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.8 3 2.8 15 0 18M12 3c-2.8 3-2.8 15 0 18"/></svg>Atendendo todo o Brasil</p>
+  </div>
+
+  <aside class="hero__side">
+    <div class="hero__badge" data-magnetic>
+      <svg viewBox="0 0 200 200" class="badge__text" aria-hidden="true">
+        <defs><path id="circlePath" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+        <text><textPath href="#circlePath">DISPONÍVEL PARA NOVOS PROJETOS • DISPONÍVEL PARA NOVOS PROJETOS • </textPath></text>
+      </svg>
+      <span class="badge__star">✦</span>
+    </div>
+    <p class="hero__tag reveal-up">Transformando ideias em<br><strong>experiências digitais</strong> que vendem.</p>
+    <ul class="stats">
+      <li class="reveal-up"><b><span data-count="4">0</span>+</b><span>Marcas<br>transformadas</span></li>
+      <li class="reveal-up"><b><span data-count="100">0</span>%</b><span>Sites<br>responsivos</span></li>
+      <li class="reveal-up"><b>&lt;<span data-count="24">0</span>h</b><span>Tempo de<br>resposta</span></li>
+    </ul>
+  </aside>
+
+  <a href="#manifesto" class="hero__scroll mono" aria-label="Rolar para baixo"><span class="scroll-line"><i></i></span>Role para explorar</a>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<section class="marquee" aria-label="Especialidades">
+  <div class="marquee__track" id="marquee">
+    <div class="marquee__group">
+      <span>Web Design</span><i>✦</i><span class="o">UI/UX</span><i>✦</i><span>Landing Pages</span><i>✦</i><span class="o">Motion</span><i>✦</i><span>Sites Institucionais</span><i>✦</i><span class="o">Performance</span><i>✦</i>
+    </div>
+    <div class="marquee__group" aria-hidden="true">
+      <span>Web Design</span><i>✦</i><span class="o">UI/UX</span><i>✦</i><span>Landing Pages</span><i>✦</i><span class="o">Motion</span><i>✦</i><span>Sites Institucionais</span><i>✦</i><span class="o">Performance</span><i>✦</i>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MANIFESTO ============ -->
+<section class="manifesto" id="manifesto">
+  <div class="sec-label mono"><span>(01)</span> Manifesto</div>
+  <p class="manifesto__text" id="manifestoText">
+    Eu não crio apenas sites. Eu construo <em>presença digital</em>
+    <span class="pill"><img src="assets/projects/evolution.webp" alt=""></span>
+    que posiciona marcas acima da concorrência, encanta no primeiro scroll
+    <span class="pill"><img src="assets/projects/amj.webp" alt=""></span>
+    e <em>converte</em> visitantes em clientes reais.
+  </p>
+  <div class="manifesto__foot">
+    <p>Design com intenção. Código com cuidado. Resultado que se mede.</p>
+    <a href="#projetos" class="btn-line" data-magnetic><span>Ver trabalhos</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="projects" id="projetos">
+  <div class="projects__pin" id="projectsPin">
+    <div class="projects__head">
+      <div class="sec-label mono"><span>(02)</span> Trabalhos</div>
+      <h2 class="sec-title"><span class="line"><span>Projetos</span></span><span class="line"><span class="stroke">Selecionados</span></span></h2>
+      <div class="projects__counter mono"><span id="projCur">01</span> / 04</div>
+    </div>
+    <div class="projects__track" id="projectsTrack">
+
+      <article class="proj" style="--brand:#e8b84a" data-cursor="Ver projeto">
+        <a href="#" class="proj__link" aria-label="AMJ Armazém">
+          <div class="proj__frame">
+            <div class="proj__bar"><i></i><i></i><i></i><span>amjarmazem.com.br</span></div>
+            <div class="proj__shot"><img src="assets/projects/amj.webp" alt="Site da AMJ Armazém" loading="lazy"></div>
+          </div>
+          <div class="proj__info">
+            <span class="proj__num">01</span>
+            <div><h3>AMJ Armazém</h3><p class="mono">Armazenagem de grãos · Guaíra/SP</p></div>
+            <span class="proj__arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+          </div>
+          <ul class="proj__tags mono"><li>Site institucional</li><li>Direção de arte</li><li>Motion</li></ul>
+        </a>
+      </article>
+
+      <article class="proj" style="--brand:#22c55e" data-cursor="Ver projeto">
+        <a href="#" class="proj__link" aria-label="Academia Água Viva">
+          <div class="proj__frame">
+            <div class="proj__bar"><i></i><i></i><i></i><span>academiaaguaviva.com.br</span></div>
+            <div class="proj__shot"><img src="assets/projects/aguaviva.webp" alt="Site da Academia Água Viva" loading="lazy"></div>
+          </div>
+          <div class="proj__info">
+            <span class="proj__num">02</span>
+            <div><h3>Academia Água Viva</h3><p class="mono">Saúde &amp; bem-estar · Guaíra/SP</p></div>
+            <span class="proj__arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+          </div>
+          <ul class="proj__tags mono"><li>Website</li><li>UI/UX</li><li>Conversão</li></ul>
+        </a>
+      </article>
+
+      <article class="proj" style="--brand:#d9a441" data-cursor="Ver projeto">
+        <a href="#" class="proj__link" aria-label="Soul Body Fitness">
+          <div class="proj__frame">
+            <div class="proj__bar"><i></i><i></i><i></i><span>soulbodyfitness.com.br</span></div>
+            <div class="proj__shot"><img src="assets/projects/soulbody.webp" alt="Site da Soul Body Fitness" loading="lazy"></div>
+          </div>
+          <div class="proj__info">
+            <span class="proj__num">03</span>
+            <div><h3>Soul Body Fitness</h3><p class="mono">Academia · Guaíra/SP</p></div>
+            <span class="proj__arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+          </div>
+          <ul class="proj__tags mono"><li>Website</li><li>Identidade digital</li><li>Animações</li></ul>
+        </a>
+      </article>
+
+      <article class="proj" style="--brand:#ff3b1f" data-cursor="Ver projeto">
+        <a href="#" class="proj__link" aria-label="Evolution Training Club">
+          <div class="proj__frame">
+            <div class="proj__bar"><i></i><i></i><i></i><span>evolutiontrainingclub.com.br</span></div>
+            <div class="proj__shot"><img src="assets/projects/evolution.webp" alt="Site da Evolution Training Club" loading="lazy"></div>
+          </div>
+          <div class="proj__info">
+            <span class="proj__num">04</span>
+            <div><h3>Evolution Training Club</h3><p class="mono">Academia · Barretos/SP</p></div>
+            <span class="proj__arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+          </div>
+          <ul class="proj__tags mono"><li>Website</li><li>UI/UX</li><li>Performance</li></ul>
+        </a>
+      </article>
+
+      <div class="proj proj--cta">
+        <a href="#contato" class="proj__cta" data-magnetic>
+          <span class="mono">Próximo case</span>
+          <strong>Sua<br>marca<br>aqui?</strong>
+          <span class="proj__cta-btn">Vamos conversar <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="services" id="servicos">
+  <div class="services__head">
+    <div class="sec-label mono"><span>(03)</span> O que eu faço</div>
+    <h2 class="sec-title"><span class="line"><span>Serviços</span></span></h2>
+  </div>
+  <ul class="svc">
+    <li class="svc__row" data-cursor="✦">
+      <span class="svc__num mono">01</span>
+      <h3>Sites Institucionais</h3>
+      <p>Presença digital completa, que transmite autoridade e conta a história da sua marca.</p>
+      <span class="svc__icon"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg></span>
+    </li>
+    <li class="svc__row" data-cursor="✦">
+      <span class="svc__num mono">02</span>
+      <h3>Landing Pages</h3>
+      <p>Páginas focadas em conversão, com copy, hierarquia e CTAs pensados para vender.</p>
+      <span class="svc__icon"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg></span>
+    </li>
+    <li class="svc__row" data-cursor="✦">
+      <span class="svc__num mono">03</span>
+      <h3>UI/UX Design</h3>
+      <p>Interfaces intuitivas e bonitas, desenhadas a partir do comportamento real do usuário.</p>
+      <span class="svc__icon"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg></span>
+    </li>
+    <li class="svc__row" data-cursor="✦">
+      <span class="svc__num mono">04</span>
+      <h3>Motion &amp; Interações</h3>
+      <p>Animações e micro-interações que dão vida ao site e deixam a experiência memorável.</p>
+      <span class="svc__icon"><svg viewBox="0 0 24 24"><path d="M5 12h14M12 5v14"/></svg></span>
+    </li>
+  </ul>
+</section>
+
+<!-- ============ SKILLS / PROCESS / QUOTE ============ -->
+<section class="about" id="processo">
+  <div class="about__col about__skills">
+    <div class="sec-label mono"><span>(04)</span> Stack &amp; Habilidades</div>
+    <h3 class="col-title">Ferramentas que <span class="accent">domino</span></h3>
+    <div class="skills" id="skills">
+      <span>Web Design</span><span>UI/UX Design</span><span>Figma</span><span>HTML / CSS</span><span>JavaScript</span><span>GSAP</span><span>Animações</span><span>Design Responsivo</span><span>SEO</span><span>Performance</span><span>IA aplicada</span><span>Copywriting</span>
+    </div>
+    <div class="skill-bars">
+      <div class="sbar"><div class="sbar__top"><span>Design de Interfaces</span><b class="mono">95%</b></div><div class="sbar__track"><i style="--w:95%"></i></div></div>
+      <div class="sbar"><div class="sbar__top"><span>Front-end &amp; Animação</span><b class="mono">90%</b></div><div class="sbar__track"><i style="--w:90%"></i></div></div>
+      <div class="sbar"><div class="sbar__top"><span>Estratégia &amp; Conversão</span><b class="mono">88%</b></div><div class="sbar__track"><i style="--w:88%"></i></div></div>
+    </div>
+  </div>
+
+  <div class="about__col about__process">
+    <div class="sec-label mono"><span>(05)</span> Processo</div>
+    <h3 class="col-title">Como eu <span class="accent">trabalho</span></h3>
+    <ol class="steps" id="steps">
+      <span class="steps__line"><i id="stepsLine"></i></span>
+      <li><span class="steps__icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span><div><b class="mono">01</b><h4>Descoberta</h4><p>Entendo objetivos, público e o que faz sua marca única.</p></div></li>
+      <li><span class="steps__icon"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><div><b class="mono">02</b><h4>Estratégia</h4><p>Arquitetura, wireframes e o caminho até a conversão.</p></div></li>
+      <li><span class="steps__icon"><svg viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4zM14 6l3 3"/></svg></span><div><b class="mono">03</b><h4>Design</h4><p>Direção de arte e interfaces com foco na experiência.</p></div></li>
+      <li><span class="steps__icon"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></span><div><b class="mono">04</b><h4>Desenvolvimento</h4><p>Código rápido, responsivo e com animações fluidas.</p></div></li>
+      <li><span class="steps__icon"><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span><div><b class="mono">05</b><h4>Entrega</h4><p>Testes, otimização e lançamento com acompanhamento.</p></div></li>
+    </ol>
+  </div>
+
+  <div class="about__quote" id="quote">
+    <div class="quote__bg" aria-hidden="true"></div>
+    <span class="quote__mark">“</span>
+    <blockquote>Bom design não é só como parece. É como funciona — e como faz seu cliente <em>sentir</em>.</blockquote>
+    <div class="quote__sign" aria-label="Assinatura Luiz Fernando"><span>Luiz Fernando</span></div>
+    <a href="#contato" class="quote__cta mono">Vamos criar algo<br>incrível juntos <span>→</span></a>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contato">
+  <div class="contact__bg" aria-hidden="true"></div>
+  <div class="sec-label mono"><span>(06)</span> Contato</div>
+  <h2 class="contact__title">
+    <span class="line"><span>Vamos</span></span>
+    <span class="line"><span>trabalhar <em>juntos</em></span></span>
+  </h2>
+  <div class="contact__grid">
+    <div class="contact__left">
+      <p>Estou aberto a novos projetos e parcerias. Conte sua ideia — eu transformo em uma experiência digital que gera resultado.</p>
+      <!-- EDITE: troque o número do WhatsApp abaixo -->
+      <a href="https://wa.me/5500000000000" target="_blank" rel="noopener" class="cta-orb" data-magnetic data-cursor="Bora!">
+        <span class="cta-orb__fill"></span>
+        <span class="cta-orb__txt">Iniciar<br>projeto</span>
+        <svg viewBox="0 0 24 24"><path d="M7 17L17 7M8 7h9v9"/></svg>
+      </a>
+    </div>
+    <ul class="contact__list">
+      <!-- EDITE: confirme e-mail, Instagram, WhatsApp e cidade -->
+      <li><a href="mailto:luyzfern4ndo@gmail.com" data-copy="luyzfern4ndo@gmail.com"><span class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span><small class="mono">E-mail</small>luyzfern4ndo@gmail.com</span><em class="mono copy-hint">copiar</em></a></li>
+      <li><a href="https://wa.me/5500000000000" target="_blank" rel="noopener"><span class="ci"><svg viewBox="0 0 24 24"><path d="M5 19l1.3-3.9A8 8 0 1 1 9 18.7L5 19z"/></svg></span><span><small class="mono">WhatsApp</small>+55 (00) 00000-0000</span><em class="mono">↗</em></a></li>
+      <li><a href="https://instagram.com/" target="_blank" rel="noopener"><span class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/></svg></span><span><small class="mono">Instagram</small>@seuusuario</span><em class="mono">↗</em></a></li>
+      <li><div class="nolink"><span class="ci"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span><span><small class="mono">Localização</small>Brasil · Atendimento remoto</span><em class="mono" id="clock">--:--</em></div></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="footer__big" aria-hidden="true"><span>LUIZ</span><span>FERNANDO</span></div>
+  <div class="footer__bar mono">
+    <span>© 2026 Luiz Fernando Tavares</span>
+    <span>Feito com café, código &amp; azul ✦</span>
+    <a href="#top" id="toTop" data-magnetic>Voltar ao topo ↑</a>
+  </div>
+</footer>
+
+<div class="toast mono" id="toast">E-mail copiado ✦</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
