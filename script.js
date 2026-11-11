@@ -5,6 +5,9 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* weaker machines (<=4 cores or <=4 GB): lighter effects */
+  const lite = (navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4;
+  if (lite) document.documentElement.classList.add('lite');
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const hasGSAP = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
 
@@ -16,6 +19,8 @@
     clock.textContent = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Sao_Paulo' }).format(new Date()) + ' BRT';
   };
   tick(); setInterval(tick, 15000);
+  // pause infinite CSS animations of sections that are off screen
+  if ('IntersectionObserver' in window) { const pio = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('off-screen', !e.isIntersecting)), { rootMargin: '100px 0px' }); $$('section, .hero, footer').forEach(el => pio.observe(el)); }
 
   // copiar e-mail
   const toast = $('#toast');
@@ -56,7 +61,7 @@
 
   /* ---------- smooth scroll (Lenis) ---------- */
   let lenis = null;
-  if (!reduce && typeof window.Lenis !== 'undefined') {
+  if (!reduce && !lite && fine && typeof window.Lenis !== 'undefined') {
     lenis = new Lenis({ duration: 1.15, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
     window.__lenis = lenis;
     lenis.on('scroll', ScrollTrigger.update);
@@ -256,8 +261,13 @@
     const glY = gsap.quickTo('.hero__glow', 'y', { duration: 1.6, ease: 'power3' });
     const rim = $('.hero__rim');
     gsap.set('.hero__img-wrap', { transformPerspective: 1200 });
-    hero.addEventListener('pointermove', e => {
-      const r = hero.getBoundingClientRect();
+    let hr = null, pe = null, pq = false;
+    const heroRect = () => { hr = hero.getBoundingClientRect(); };
+    addEventListener('resize', () => { hr = null; }, { passive: true });
+    addEventListener('scroll', () => { hr = null; }, { passive: true });
+    hero.addEventListener('pointermove', e => { pe = e; if (!pq) { pq = true; requestAnimationFrame(heroMove); } });
+    function heroMove() {
+      pq = false; const e = pe; if (!hr) heroRect(); const r = hr;
       const nx = (e.clientX - r.left) / r.width - .5;
       const ny = (e.clientY - r.top) / r.height - .5;
       gX(nx * -40);
@@ -266,9 +276,9 @@
       glX(nx * 160); glY(ny * 120);
       // luz de recorte acompanha o cursor
       const ang = Math.atan2(ny, nx) * 180 / Math.PI + 90;
-      rim.style.setProperty('--rim-a', `${ang + 180}deg`);
+      if (!lite) rim.style.setProperty('--rim-a', `${(ang + 180).toFixed(0)}deg`);
       coord.textContent = `X ${String(Math.round(e.clientX)).padStart(4, '0')} · Y ${String(Math.round(e.clientY)).padStart(4, '0')}`;
-    });
+    }
   }
 
   /* ---------- HERO: scroll out ---------- */
@@ -292,7 +302,7 @@
     let w, h, dpr, pts = [], mx = -999, my = -999, running = true;
     const GAP = 30;
     const resize = () => {
-      dpr = Math.min(devicePixelRatio || 1, 2);
+      dpr = Math.min(devicePixelRatio || 1, lite ? 1 : 1.5);
       w = cv.clientWidth; h = cv.clientHeight;
       cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       pts = [];
@@ -300,14 +310,26 @@
     };
     resize();
     addEventListener('resize', resize);
-    hero.addEventListener('pointermove', e => { const r = cv.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; });
-    hero.addEventListener('pointerleave', () => { mx = my = -999; });
-    ScrollTrigger.create({ trigger: hero, start: 'top bottom', end: 'bottom top', onToggle: s => { running = s.isActive; if (running) requestAnimationFrame(draw); } });
+    let cr = null, lastMove = 0, last = 0, queued = false;
+    addEventListener('resize', () => { cr = null; }, { passive: true });
+    addEventListener('scroll', () => { cr = null; }, { passive: true });
+    const wake = () => { if (running && !queued) { queued = true; requestAnimationFrame(draw); } };
+    hero.addEventListener('pointermove', e => { if (!cr) cr = cv.getBoundingClientRect(); mx = e.clientX - cr.left; my = e.clientY - cr.top; lastMove = performance.now(); wake(); });
+    hero.addEventListener('pointerleave', () => { mx = my = -999; lastMove = performance.now(); wake(); });
+    ScrollTrigger.create({ trigger: hero, start: 'top bottom', end: 'bottom top', onToggle: s => { running = s.isActive; wake(); } });
+    document.addEventListener('visibilitychange', () => { running = !document.hidden && ScrollTrigger.isInViewport(hero); wake(); });
     let t = 0;
-    function draw() {
+    const BUCKETS = 10, paths = [];
+    function draw(now) {
+      queued = false;
       if (!running) return;
-      t += .01;
+      now = now || performance.now();
+      const active = now - lastMove < 1200;
+      // idle: ~30fps wave (weak machines: hold still until the mouse moves)
+      if (!active && (lite || now - last < 32)) { if (!lite) wake(); return; }
+      t += (now - (last || now)) * .0006; last = now;
       ctx.clearRect(0, 0, w, h);
+      for (let i = 0; i < BUCKETS; i++) paths[i] = new Path2D();
       const R = 170;
       for (const p of pts) {
         const dx = p.ox - mx, dy = p.oy - my, d = Math.hypot(dx, dy);
@@ -319,23 +341,27 @@
           p.y += ((p.oy + dy / d * f * 14) - p.y) * .2;
           a += f * .75; s += f * 1.4;
         } else { p.x += (p.ox - p.x) * .1; p.y += (p.oy - p.y) * .1; }
-        ctx.fillStyle = `rgba(110,155,255,${a})`;
-        ctx.beginPath(); ctx.arc(p.x, p.y, s, 0, 6.283); ctx.fill();
+        const b = Math.min(BUCKETS - 1, Math.round(a * BUCKETS));
+        if (s < 1.3) paths[b].rect(p.x - s, p.y - s, s * 2, s * 2);
+        else { paths[b].moveTo(p.x + s, p.y); paths[b].arc(p.x, p.y, s, 0, 6.283); }
       }
-      requestAnimationFrame(draw);
+      for (let i = 0; i < BUCKETS; i++) { ctx.fillStyle = `rgba(110,155,255,${((i + .5) / BUCKETS).toFixed(2)})`; ctx.fill(paths[i]); }
+      wake();
     }
-    requestAnimationFrame(draw);
+    lastMove = performance.now(); last = 0; wake();
   })();
 
   /* ---------- MARQUEE com velocidade do scroll ---------- */
   (() => {
     const track = $('#marquee');
     const group = $('.marquee__group', track);
-    let x = 0, dir = -1, boost = 0;
+    let x = 0, dir = -1, boost = 0, gw = 0, vis = true;
+    const measure = () => { gw = group.offsetWidth; };
+    measure(); addEventListener('resize', measure, { passive: true }); addEventListener('load', measure);
+    new IntersectionObserver(es => es.forEach(e => { vis = e.isIntersecting; })).observe(track);
     if (lenis) lenis.on('scroll', e => { boost = Math.min(Math.abs(e.velocity) * .9, 30); dir = e.direction === 1 ? -1 : 1; });
     gsap.ticker.add(() => {
-      const gw = group.offsetWidth;
-      if (!gw) return;
+      if (!gw || !vis) return;
       x += dir * (reduce ? 0 : (1 + boost));
       boost *= .92;
       if (x <= -gw) x += gw;
@@ -399,13 +425,15 @@
       const rX = gsap.quickTo(fr, 'rotateX', { duration: .8, ease: 'power3' });
       const rY = gsap.quickTo(fr, 'rotateY', { duration: .8, ease: 'power3' });
       gsap.set(fr, { transformPerspective: 1400 });
+      let r = null;
+      fr.addEventListener('pointerenter', () => { r = fr.getBoundingClientRect(); });
       fr.addEventListener('pointermove', e => {
-        const r = fr.getBoundingClientRect();
+        if (!r) r = fr.getBoundingClientRect();
         const nx = (e.clientX - r.left) / r.width, ny = (e.clientY - r.top) / r.height;
         rY((nx - .5) * 8); rX((.5 - ny) * 8);
         fr.style.setProperty('--mx', nx * 100 + '%'); fr.style.setProperty('--my', ny * 100 + '%');
       });
-      fr.addEventListener('pointerleave', () => { rX(0); rY(0); });
+      fr.addEventListener('pointerleave', () => { rX(0); rY(0); r = null; });
     });
   }
 
