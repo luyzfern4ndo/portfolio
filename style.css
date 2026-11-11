@@ -271,7 +271,7 @@ section{position:relative}
 .proj__bar{display:flex;align-items:center;gap:6px;padding:11px 14px;background:#0a0f1f;border-bottom:1px solid var(--line)}
 .proj__bar i{width:9px;height:9px;border-radius:50%;background:#26304d}
 .proj__bar i:first-child{background:#ff5f57}.proj__bar i:nth-child(2){background:#febc2e}.proj__bar i:nth-child(3){background:#28c840}
-.proj__bar span{margin-left:12px;font:500 11px var(--f-mono);color:var(--dim);background:#060a16;padding:4px 12px;border-radius:6px;flex:1;max-width:320px}
+.proj__bar span{margin-left:12px;font:500 11px var(--f-mono);color:var(--dim);background:#060a16;padding:4px 12px;border-radius:6px;flex:1;max-width:420px;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .proj__shot{aspect-ratio:16/10;overflow:hidden;position:relative}
 .proj__shot img{width:100%;height:100%;object-fit:cover;object-position:top;transform:scale(1.12);transition:transform 1.2s var(--ease)}
 .proj:hover .proj__shot img{transform:scale(1.04)}
