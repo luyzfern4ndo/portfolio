@@ -377,7 +377,6 @@
     opacity: 1, stagger: .1, ease: 'none',
     scrollTrigger: { trigger: '#manifestoText', start: 'top 80%', end: 'bottom 45%', scrub: .6 }
   });
-  gsap.from('.pill', { width: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '#manifestoText', start: 'top 70%' } });
   gsap.from('.manifesto__foot', { opacity: 0, y: 30, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: '.manifesto__foot', start: 'top 90%' } });
 
   /* ---------- títulos de seção (linhas) ---------- */
